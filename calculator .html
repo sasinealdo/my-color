@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View My Calculations</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 420px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f0f4f8;
+    }
+    .calculator {
+      background: pink;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px #0002;
+    }
+    input, select, button {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      margin: 8px 0;
+      font-size: 16px;
+    }
+    button {
+      background: #1769e0;
+      color: black;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #result {
+      font-size: 20px;
+      font-weight: bold;
+      overflow-wrap: anywhere;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h2>View calculation</h2>
+
+    <input type="number" id="num1" placeholder="First number"
+           step="any">
+<select id="operation">
+  <option value="add">Addition (+)</option>
+  <option value="subtract">Subtraction (-)</option>
+  <option value="multiply">Multiplication (×)</option>
+  <option value="divide">Division (÷)</option>
+  <option value="greater">Greater Than (&gt;)</option>
+  <option value="less">Less Than (&lt;)</option>
+</select>
+
+    <input type="number" id="num2" placeholder="Second number"
+           step="any">
+
+    <button onclick="calculate()">Calculate</button>
+    <p id="result">Result: —</p>
+  </div>
+
+  <script>
+    function calculate() {
+      const a = document.getElementById("num1").value;
+      const b = document.getElementById("num2").value;
+      const op = document.getElementById("operation").value;
+      const output = document.getElementById("result");
+
+      if (a.trim() === "" || b.trim() === "") {
+        output.textContent = "Please enter both numbers.";
+        return;
+      }
+
+      const x = Number(a);
+      const y = Number(b);
+      let answer;
+
+      switch (op) {
+        case "add":
+          answer = x + y;
+          break;
+        case "subtract":
+          answer = x - y;
+          break;
+        case "multiply":
+          answer = x * y;
+          break;
+        case "divide":
+          if (y === 0) {
+            output.textContent = "Cannot divide by zero.";
+            return;
+          }
+          answer = x / y;
+          break;
+      }
+
+      output.textContent = "Result: " + answer;
+    }
+  </script>
+</body>
+</html>
